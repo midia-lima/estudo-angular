@@ -1,49 +1,65 @@
 <section>
-  <!-- <article>
-    <h3>interpolação/interpolation</h3>
+  <article class="container mt-5">
+    <h3 class="text-center">Interpolação/Interpolation</h3>
     <p>String renderiza com interpolação: {{ url }}</p>
     <p>Resultado de 1 + 1 é: {{ 1 + 1 }}</p>
     <p>Resultado de 1 + 1 não é: {{ 1 + 1 + getValor()}}</p>
     <p>Curso de angular e gosto do curso: {{ cursoAngular && getCurtirCurso() }}</p>
   </article>
 
-  <article>
-    <h3>Property Binding</h3>
-    <img src="{{ urlImagem }}"><br><br>
-    <img [src]="urlImagem">
-  </article> -->
+  <article class="container mt-5">
+    <h3 class="text-center">Property Binding</h3>
+    <img class="img-fluid rounded mx-auto d-block" src="{{ urlImagem }}"><br><br>
+    <!-- <img [src]="urlImagem"> -->
+  </article>
 
   <article class="container mt-5">
     <h3 class="text-center">Class e Style Binding</h3>
-    <div>Selecione uma classe:
-      <select #classe (change)="0">
+    <div>
+      Selecione uma classe:
+      <select #classe (change)="(0)">
         <option value="alert-success">Success</option>
         <option value="alert-info">Info</option>
         <option value="alert-warning">Warning</option>
         <option value="alert-danger">Danger</option>
       </select>
-      <br><br>
+      <br /><br />
       <div class="alert {{ classe.value }}" role="alert">
         Texto colorido conforme o valor do combobox
       </div>
-      <div class="alert" role="alert"
-        [class.alert-success]="classe.value == 'alert-success'">
+      <div
+        class="alert"
+        role="alert"
+        [class.alert-success]="classe.value == 'alert-success'"
+      >
         Success
       </div>
-      <div class="alert" role="alert"
-      [class.alert-info]="classe.value == 'alert-info'">
+      <div
+        class="alert"
+        role="alert"
+        [class.alert-info]="classe.value == 'alert-info'"
+      >
         Info
       </div>
-      <div class="alert" role="alert"
-      [class.alert-warning]="classe.value == 'alert-warning'">
+      <div
+        class="alert"
+        role="alert"
+        [class.alert-warning]="classe.value == 'alert-warning'"
+      >
         Warning
       </div>
-      <div class="alert" role="alert"
-      [class.alert-danger]="classe.value == 'alert-danger'">
+      <div
+        class="alert"
+        role="alert"
+        [class.alert-danger]="classe.value == 'alert-danger'"
+      >
         Danger
       </div>
-      <div class="alert alert-danger" role="alert"
-      [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
+      <div
+        class="alert alert-danger"
+        role="alert"
+        [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'"
+      >
         Esse texto só aparece em caso de erro.
       </div>
     </div>
@@ -52,24 +68,24 @@
   <article class="container mt-5">
     <h3 class="text-center">Event binding</h3>
 
-
     <!-- evento de click -->
-    <button (click)="botaoClicado()"
-    class="btn btn-primary">Me Clique!</button>
+    <button (click)="botaoClicado()" class="btn btn-primary">Me Clique!</button>
 
-    <br><br>
+    <br /><br />
 
     <!-- pega o valor que está sendo digitado no input -->
-    <input type="text"
+    <input
+      type="text"
       (keyup)="onKeyUp($event)"
       (keyup.enter)="salvarValor(campoInput.value)"
       (blur)="salvarValor(campoInput.value)"
-      #campoInput/>
+      #campoInput
+    />
 
-      <p>Valor Atual - evento keyup: {{ valorAtual }}</p>
-      <p>Valor Atual - evento keyup.enter: {{ valorSalvo }}</p>
+    <p>Valor Atual - evento keyup: {{ valorAtual }}</p>
+    <p>Valor Atual - evento keyup.enter: {{ valorSalvo }}</p>
 
-      <br>
+    <br />
 
     <span
       (mouseover)="onMouseOverOut()"
@@ -78,8 +94,17 @@
     >
       Passe o mouse sobre mim
     </span>
-
   </article>
 
+  <app-form-teste></app-form-teste>
+
+  <article class="container mt-5">
+    <h3 class="text-center">Input/Output Properties</h3>
+
+    <app-curso [nome]="nomeDoCurso"></app-curso>
+
+
+
+  </article>
 
 </section>

@@ -1,0 +1,34 @@
+<article class="container mt-5">
+  <h3 class="text-center mb-5">Two-way data binding</h3>
+
+  <div class="row">
+    <!-- Ex:01 - conseguimos passar o valor do componente para o template e vice e versa -->
+    <input type="text" class="col form-control"
+      [value]='nome'
+      (input)='nome = $event.target.value'
+    />
+
+    <!-- Ex: 02 -->
+    <!-- binding de propiedade e binding de eventos -->
+    <input type="text" class="col form-control pl-5"
+    [ngModel]="nome"
+    (ngModelChange)="nome = $event"
+    />
+
+    <!-- Ex: 03 -->
+    <!-- binding de propiedade e evento -->
+    <input type="text" class="col form-control" [(ngModel)]="nome" />
+
+    <p>Você recebeu o nome de <b>{{ nome }}</b></p>
+  </div>
+
+  <div class="row">
+    <input type="text" class="col form-control" [(ngModel)]="pessoa.nome" />
+    <input type="text" class="col form-control" [(ngModel)]="pessoa.idade" >
+    <br>
+    <p>Meu nome é {{ pessoa.nome }}, e tenho {{pessoa.idade}}</p>
+
+  </div>
+
+</article>
+
