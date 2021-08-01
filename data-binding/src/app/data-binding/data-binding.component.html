@@ -100,11 +100,14 @@
 
   <article class="container mt-5">
     <h3 class="text-center">Input/Output Properties</h3>
-
     <app-curso [nome]="nomeDoCurso"></app-curso>
+  </article>
 
-
-
+  <article class="container mt-5">
+    <app-contador [valor]="valorInicial"
+      (mudouValor)="onMudouValor($event)"
+    ></app-contador>
+    <br><br>
   </article>
 
 </section>

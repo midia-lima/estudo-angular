@@ -17,6 +17,7 @@ export class DataBindingComponent  {
   isMouseOver: boolean = false;
 
   nomeDoCurso: string = 'Angular';
+  valorInicial = 15;
 
 
 
@@ -45,10 +46,9 @@ export class DataBindingComponent  {
 
   }
 
-
-
-
-
+  onMudouValor(evento){
+    console.log(evento.novoValor);
+  }
 
   constructor() { }
 
