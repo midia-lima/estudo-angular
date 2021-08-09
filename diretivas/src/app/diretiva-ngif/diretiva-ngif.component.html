@@ -1,0 +1,23 @@
+<section class="container mt-5">
+  <h5>Diretiva *ngIf</h5>
+  <div *ngIf="cursos.length > 0">Lista de cursos aqui</div>
+  <div *ngIf="cursos.length == 0">Não existem cursos para serem listados</div>
+  
+  <div *ngIf="mostrarCursos">Lista de cursos aqui</div>
+  <div *ngIf="!mostrarCursos">Não existem cursos para serem listados</div>
+  <br />
+  <button (click)="onMostrarCursos()">Mostrar ou esconder cursos</button>
+  <h5>hidden como alternativa</h5>
+  <div [hidden]="!mostrarCursos">Lista de cursos aqui</div>
+  <div [hidden]="mostrarCursos">Não existem cursos para serem listados</div>
+</section>
+<section class="container mt-5">
+  <h5>Removendo o * (asterisco) e usando o template</h5>
+  <div *ngIf="mostrarCursos">Lista de cursos aqui</div>
+
+  <ng-template ngFor [ngIf]="mostrarCursos">
+    <div>Lista de cursos aqui.</div>
+  </ng-template>
+</section>
+
+
