@@ -4,6 +4,7 @@
 <p>O Objetivo desse repósitorio é armazenar o estudo de Angular</p>
 
 <h2>:books: Conteúdo</h2>
+
 ## Introdução
 * 01: Introdução + Arquitetura
 * 02: Ambiente de desenvolvimento
