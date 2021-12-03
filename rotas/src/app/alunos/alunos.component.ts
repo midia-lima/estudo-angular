@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-
 import { AlunosService } from './alunos.service';
 
 @Component({
@@ -15,12 +13,9 @@ export class AlunosComponent implements OnInit {
 
   constructor(
     private alunosService: AlunosService,
-
   ) { }
 
   ngOnInit() {
     this.alunos = this.alunosService.getAlunos();
   }
-
-
 }
