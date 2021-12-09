@@ -6,14 +6,14 @@
 <h2>:books: Conteúdo</h2>
 
 ## Introdução
-* 01: Introdução + Arquitetura
-* 02: Ambiente de desenvolvimento
-* 03: Primeira app (Hello World)
-* 04: Introduço ao Typescript para Angular
-* 05: Módulos (ngModule)
-* 06: Templates
-* 07: Serviços (Services) e Injeção de dependência (DI)
-* 08: Dica de produtividade: code snippets
+01: Introdução + Arquitetura
+02: Ambiente de desenvolvimento
+03: Primeira app (Hello World)
+04: Introdução ao Typescript para Angular
+05: Módulos (ngModule)
+06: Templates
+07: Serviços (Services) e Injeção de dependência (DI)
+08: Dica de produtividade: code snippets
 
 ## Data binding e eventos
 * 09: Property binding + Interpolation
