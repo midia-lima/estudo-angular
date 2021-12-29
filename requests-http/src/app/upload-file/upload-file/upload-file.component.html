@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="input-group">
+    <input type="file" class="form-control" id="customFile" (change)="onChange($event)" multiple />
+  </div>
+  <div class="progress mt-2">
+    <div class="progress-bar" role="progressbar" style="width: 25%"
+    [style.width]="progress + '%'">
+      {{ progress }}%
+    </div>
+  </div>
+  <button class="btn btn-outline-primary mt-2" type="button" (click)="onUpload()" [disabled]="!files">
+    Salvar
+  </button>
+
+  <div>
+    <button class="btn btn-outline-primary mt-2" type="button" (click)="onDownloadExcel()">
+      Download Excel
+    </button>
+    <button class="btn btn-outline-primary mt-2" type="button" (click)="onDownloadPdf()">
+      Download PDF
+    </button>
+  </div>
+
+</div>

@@ -24,7 +24,7 @@
         <div class="col-3 mb-3">
           <label for="cep" class="form-label">CEP</label>
           <input type="cep" class="form-control" id="cep" name="cep" [(ngModel)]="usuario.cep" required #cep="ngModel"
-          (blur)="consultaCEP($event.target.value)">
+          (blur)="consultaCEP($event.target.value, formTemplate)">
           <div class="span-red" *ngIf="!cep.valid && cep.touched">CEP é obrigatório</div>
         </div>
 
@@ -44,10 +44,10 @@
 
       <div class="row">
         <div class="mb-3">
-          <label for="rua" class="form-label">Rua</label>
-          <input type="text" class="form-control" id="rua" name="rua" [(ngModel)]="usuario.rua" required #rua="ngModel"
+          <label for="logradouro" class="form-label">Rua</label>
+          <input type="text" class="form-control" id="logradouro" name="logradouro" [(ngModel)]="usuario.logradouro" required #logradouro="ngModel"
             readonly>
-          <div class="span-red" *ngIf="!rua.valid && rua.touched">A rua é obrigatório</div>
+          <div class="span-red" *ngIf="!logradouro.valid && logradouro.touched">A Rua é obrigatório</div>
         </div>
       </div>
 
@@ -60,17 +60,17 @@
         </div>
 
         <div class="col-4 mb-3">
-          <label for="cidade" class="form-label">Cidade</label>
-          <input type="cidade" class="form-control" id="cidade" name="cidade" [(ngModel)]="usuario.cidade" required
-            #cidade="ngModel" readonly>
-          <div class="span-red" *ngIf="!cidade.valid && cidade.touched">Cidade é obrigatório</div>
+          <label for="localidade" class="form-label">Cidade</label>
+          <input type="localidade" class="form-control" id="localidade" name="localidade" [(ngModel)]="usuario.localidade" required
+            #localidade="ngModel" readonly>
+          <div class="span-red" *ngIf="!localidade.valid && localidade.touched">Cidade é obrigatório</div>
         </div>
 
         <div class="col-3 mb-6">
-          <label for="estado" class="form-label">Estado</label>
-          <input type="estado" class="form-control" id="estado" name="estado" [(ngModel)]="usuario.estado" required
-            #estado="ngModel" readonly>
-          <div class="span-red" *ngIf="!estado.valid && estado.touched">Estado é obrigatório</div>
+          <label for="uf" class="form-label">Estado</label>
+          <input type="uf" class="form-control" id="uf" name="uf" [(ngModel)]="usuario.uf" required
+            #uf="ngModel" readonly>
+          <div class="span-red" *ngIf="!uf.valid && uf.touched">Estado é obrigatório</div>
         </div>
       </div>
     </div>

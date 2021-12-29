@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ConsultaCepService } from '../shared/service/consulta-cep.service';
 
 
 @Component({
@@ -10,37 +12,89 @@ import { HttpClient } from '@angular/common/http';
 export class TemplateFormComponent implements OnInit {
 
   usuario: any = {
-    'nome': null,
-    'email': null,
-    'endereco': {
-      'cep': '',
-      'numero': '',
-      'complemento': '',
-      'rua': '',
-      'bairro': '',
-      'cidade': '',
-      'estado': ''
-    },
-
-  }
-
-  constructor(private http: HttpClient) { }
-
-  consultaCEP(cep) {
-    cep = cep.replace(/\D/g, '')
-    if(cep != "") {
-      var validaCep = /^[0-9]{8}$/;
-      if (validaCep.test(cep)) {
-        this.http.get(`https://viacep.com.br/ws/${cep}/json`).subscribe(cep => { console.log(cep); });
-
-      }
+    nome: null,
+    email: null,
+    endereco: {
+      cep: '',
+      logradouro: '',
+      numero: '',
+      complemento: '',
+      bairro: '',
+      localidade: '',
+      uf: '',
     }
-    console.log(cep)
+
   }
 
-  onSubmit(form){
+  constructor(
+    private http: HttpClient,
+    private cepService: ConsultaCepService
+  ) { }
+
+  consultaCEP(cep, form) {
+    cep = cep.replace(/\D/g, '')
+
+    if (cep != null && cep !== "") {
+      this.cepService.consultaCEP(cep)
+      .subscribe(dados => this.populaDadosForm(dados ,form));
+
+    }
+
+  }
+
+  populaDadosForm(dados, formulario) {
+
+    /*
+    formulario.setValue({
+      nome: formulario.value.nome,
+      email: formulario.value.email,
+      endereco: {
+        cep: dados.cep,
+        logradouro: dados.logradouro,
+        numero: '',
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        localidade: dados.localidade,
+        uf: dados.uf,
+      }
+    });
+    */
+
+    formulario.form.patchValue({
+      endereco: {
+        cep: dados.cep,
+        logradouro: dados.logradouro,
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        localidade: dados.localidade,
+        uf: dados.uf,
+      }
+    })
+
+  }
+
+  resetaDadosForm(formulario) {
+
+    formulario.form.patchValue({
+      endereco: {
+        cep: null,
+        logradouro: null,
+        complemento: null,
+        bairro: null,
+        localidade: null,
+        uf: null
+      }
+    })
+  }
+
+  onSubmit(form) {
     console.log(form);
-    console.log(this.usuario);
+    this.http.post('https://httpbin.org/post', JSON.stringify(form.value)).subscribe(dados => {
+      console.log(dados)
+      form.form.reset();
+
+    });
+
   }
 
   ngOnInit(): void {

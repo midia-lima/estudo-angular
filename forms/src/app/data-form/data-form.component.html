@@ -1,1 +1,205 @@
-<p>data-form works!</p>
+<form class="container mt-5" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="nome" formControlName="nome">
+
+      <!-- <div class="span-red" *ngIf="!formulario.controls['nome'].valid && formulario.controls['nome'].touched">Nome é
+        obrigatório
+      </div> -->
+      <!-- <div class="span-red" *ngIf="!formulario.get('nome').valid && formulario.get('nome').touched">Nome é obrigatório</div> -->
+
+      <app-error-msg [control]="formulario.get('nome')" label="Nome"></app-error-msg>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mb-3">
+      <label for="email" class="form-label">E-mail</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+      <app-error-msg [control]="formulario.get('email')" label="Email"></app-error-msg>
+
+      <!-- <div class="span-red" *ngIf="!formulario.get('email').valid && formulario.get('email').touched">
+        E-mail obrigatório
+      </div> -->
+
+      <div class="span-red" *ngIf="formulario.get('email').status === 'PENDING'">
+        Validando E-mail
+      </div>
+      <div class="span-red" *ngIf="formulario.get('email').status === 'VALID'">
+        E-mail válido
+      </div>
+      <div class="span-red" *ngIf="formulario.get('email').hasError('emailInvalido')">
+        E-mail já cadastrado
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mb-3">
+      <label for="confirmarEmail" class="form-label">Confirmar E-mail</label>
+      <input type="confirmarEmail" class="form-control" id="confirmarEmail" formControlName="confirmarEmail">
+      <div class="span-red" *ngIf="!formulario.get('confirmarEmail').valid && formulario.get('confirmarEmail').touched">
+        Confirmação de e-mail obrigatório
+      </div>
+      <div class="span-red" *ngIf="formulario.get('confirmarEmail').hasError('equalsTo')">
+        E-mails não são iguais
+      </div>
+    </div>
+  </div>
+
+  <div formGroupName="endereco">
+    <div class="row">
+      <div class="col-3 mb-3">
+        <label for="cep" class="form-label">CEP</label>
+        <input type="text" class="form-control" id="cep" formControlName="cep">
+        <div class="span-red" *ngIf="!formulario.get('endereco.cep').valid && formulario.get('endereco.cep').touched">
+          CEP é obrigatório
+        </div>
+
+        <div class="span-red" *ngIf="formulario.get('endereco.cep').hasError('cepInvalido')">
+          CEP inválido
+        </div>
+      </div>
+
+      <div class="col-3 mb-3">
+        <label for="numero" class="form-label">Número</label>
+        <input type="text" class="form-control" id="numero" formControlName="numero">
+        <div class="span-red"
+          *ngIf="!formulario.get('endereco.numero').valid && formulario.get('endereco.numero').touched">Número é
+          obrigatório</div>
+      </div>
+
+      <div class="col-6 mb-6">
+        <label for="complemento" class="form-label">Complemento</label>
+        <input type="text" class="form-control" id="complemento" formControlName="complemento">
+        <div class="span-red"
+          *ngIf="!formulario.get('endereco.complemento').valid && formulario.get('endereco.complemento').touched">CEP é
+          obrigatório</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3">
+        <label for="logradouro" class="form-label">Rua</label>
+        <input type="text" class="form-control" id="logradouro" formControlName="logradouro">
+        <div class="span-red"
+          *ngIf="!formulario.get('endereco.logradouro').valid && formulario.get('endereco.logradouro').touched">Rua é
+          obrigatório</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5 mb-3">
+        <label for="bairro" class="form-label">Bairro</label>
+        <input type="text" class="form-control" id="bairro" formControlName="bairro">
+        <div class="span-red"
+          *ngIf="!formulario.get('endereco.bairro').valid && formulario.get('endereco.bairro').touched">Bairro é
+          obrigatório
+        </div>
+      </div>
+
+      <div class="col-4 mb-3">
+        <label for="localidade" class="form-label">Cidade</label>
+        <input type="text" class="form-control" id="localidade" formControlName="localidade">
+        <div class="span-red"
+          *ngIf="!formulario.get('endereco.localidade').valid && formulario.get('endereco.localidade').touched">Cidade é
+          obrigatório</div>
+      </div>
+
+      <div class="col-3 mb-6">
+        <label for="uf" class="form-label">Estado</label>
+        <select class="form-control" name="uf" id="uf" formControlName="uf">
+          <option *ngFor="let uf of estados | async" [value]="uf.sigla">{{ uf.nome }}</option>
+        </select>
+        <!-- <input type="text" class="form-control" id="uf" formControlName="uf" > -->
+        <div class="span-red" *ngIf="!formulario.get('endereco.uf').valid && formulario.get('endereco.uf').touched">
+          Estado é obrigatório</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-4 mb-3">
+      <label for="cargo" class="form-label">Cargo</label>
+      <select class="form-control" name="cargo" id="cargo" formControlName="cargo" [compareWith]="compararCargos">
+        <option *ngFor="let cargo of cargos " [ngValue]="cargo">{{ cargo.desc }}</option>
+      </select>
+    </div>
+
+    <div class="col-4 mb-3">
+      <label for="tecnologias" class="form-label">tecnologias</label>
+      <select multiple class="form-control" name="tecnologias" id="tecnologias" formControlName="tecnologias">
+        <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia.nome">{{ tecnologia.desc }}</option>
+      </select>
+    </div>
+
+    <div class="col-4 mb-3">
+      <div class="row">
+        <label for="newsletter" class="form-label">Newsletter</label>
+      </div>
+
+      <div class="col" *ngFor="let item of newsletterOp">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="newsletter" [value]="item.valor">
+          <label class="form-check-label">{{ item.desc }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-4 mb-3 form-check">
+      <label for="frameworks" class="form-check-label"></label>
+      <div id="termos">
+        <input class="form-check-input" formControlName="termos" type="checkbox">
+        Aceite os termos
+      </div>
+      <div class="span-red" *ngIf="!formulario.controls['termos'].valid && formulario.controls['termos'].touched">
+        Termos é obrigatório
+      </div>
+    </div>
+
+    <div class="col-4 mb-3 form-check">
+      <label for="frameworks">Frameworks</label>
+      <div id="frameworks">
+        <div class="form-check form-check-inline" formArrayName="frameworks"
+        *ngFor="let item of formulario.get('frameworks')['controls']; let i = index" >
+          <label class="form-check-label" for="inlineCheckbox1"> {{ frameworks[i] }}
+            <input class="form-check-input" type="checkbox" [formControlName]="i">
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row mt-5">
+    <div class="col-1">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    <div class="col-1">
+      <button class="btn btn-default" (click)="resetar()">Cancelar</button>
+    </div>
+
+    <div class="col-1">
+      <button class="btn btn-info" (click)="setarCargo()">Cargo</button>
+    </div>
+
+    <div class="col-1">
+      <button class="btn btn-info" (click)="setarTecnologias()">Tecnologias</button>
+    </div>
+
+  </div>
+
+
+
+</form>
+
+<app-form-debug [form]="formulario"></app-form-debug>
